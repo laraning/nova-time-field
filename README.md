@@ -46,6 +46,12 @@ By default the time component uses a 24 hour format. Still you can make it in 12
 ```php
 TimeField::make('Post start Time')->withTwelveHourTime(),
 ```
+## Current development status
+
+- [x] Make release 0.1.0.
+- [ ] Add minimal test scenarios.
+- [ ] Add timezone support.
+
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
