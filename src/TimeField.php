@@ -2,10 +2,10 @@
 
 namespace Laraning\NovaTimeField;
 
+use Carbon\Carbon;
+use DateTime;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use DateTime;
-use Carbon\Carbon;
 
 class TimeField extends Field
 {
@@ -19,9 +19,10 @@ class TimeField extends Field
     /**
      * Create a new field.
      *
-     * @param  string  $name
-     * @param  string|null  $attribute
-     * @param  mixed|null  $resolveCallback
+     * @param string      $name
+     * @param string|null $attribute
+     * @param mixed|null  $resolveCallback
+     *
      * @return void
      */
     public function __construct($name, $attribute = null, $resolveCallback = null)
@@ -49,10 +50,11 @@ class TimeField extends Field
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  string  $requestAttribute
-     * @param  object  $model
-     * @param  string  $attribute
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
+     * @param string                                  $requestAttribute
+     * @param object                                  $model
+     * @param string                                  $attribute
+     *
      * @return void
      */
     protected function fillAttributeFromRequest(
@@ -65,7 +67,7 @@ class TimeField extends Field
             $sentData = $request[$requestAttribute];
 
             if (DateTime::createFromFormat('H:i', $sentData) === false) {
-                throw new Exception("The field must contain a valid time.");
+                throw new Exception('The field must contain a valid time.');
             }
 
             $newDate = Carbon::createFromFormat('H:i', $request[$requestAttribute])->format('H:i');
