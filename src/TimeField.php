@@ -37,7 +37,7 @@ class TimeField extends Field
      *
      * @return $this
      */
-    public function nullable($nullable = true, $values = NULL)
+    public function nullable($nullable = true, $values = null)
     {
         return $this->withMeta(['nullable' => true]);
     }
