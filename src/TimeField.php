@@ -32,16 +32,6 @@ class TimeField extends Field
         });
     }
 
-    /**
-     * Indicate that the date field is nullable.
-     *
-     * @return $this
-     */
-    public function nullable()
-    {
-        return $this->withMeta(['nullable' => true]);
-    }
-
     public function withTwelveHourTime()
     {
         return $this->withMeta(['twelveHourTime' => true]);
