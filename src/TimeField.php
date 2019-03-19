@@ -2,6 +2,7 @@
 
 namespace Laraning\NovaTimeField;
 
+use Closure;
 use Carbon\Carbon;
 use DateTime;
 use Laravel\Nova\Fields\Field;
@@ -33,11 +34,13 @@ class TimeField extends Field
     }
 
     /**
-     * Indicate that the date field is nullable.
+     * Indicate that the field should be nullable.
      *
+     * @param  bool $nullable
+     * @param  array|Closure $values
      * @return $this
      */
-    public function nullable()
+    public function nullable($nullable = true, $values = null)
     {
         return $this->withMeta(['nullable' => true]);
     }
