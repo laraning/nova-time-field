@@ -28,7 +28,7 @@ class TimeField extends Field
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
-            return Carbon::createFromFormat('H:i', $value)->format('H:i');
+            return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
         });
     }
 
@@ -70,7 +70,7 @@ class TimeField extends Field
                 throw new Exception('The field must contain a valid time.');
             }
 
-            $newDate = Carbon::createFromFormat('H:i', $request[$requestAttribute])->format('H:i');
+            $newDate = Carbon::createFromFormat('H:i', $request[$requestAttribute])->format('H:i:s');
             $model->{$attribute} = $newDate;
         }
     }
