@@ -32,16 +32,6 @@ class TimeField extends Field
         });
     }
 
-    /**
-     * Indicate that the date field is nullable.
-     *
-     * @return $this
-     */
-    public function nullable($nullable = true, $value = null)
-    {
-        return $this->withMeta(['nullable' => true]);
-    }
-
     public function withTwelveHourTime()
     {
         return $this->withMeta(['twelveHourTime' => true]);
@@ -63,15 +53,20 @@ class TimeField extends Field
         $model,
         $attribute
     ) {
-        if ($request->exists($requestAttribute) && $request[$requestAttribute]) {
+        if ($request->exists($requestAttribute)) {
             $sentData = $request[$requestAttribute];
+            if ($this->isNullValue($sentData)){
+                $model->{$attribute} = null;
+                return;
+            }
 
-            if (DateTime::createFromFormat('H:i', $sentData) === false) {
+            $value = DateTime::createFromFormat('H:i', $sentData);
+
+            if ($value === false) {
                 throw new Exception('The field must contain a valid time.');
             }
 
-            $newDate = Carbon::createFromFormat('H:i', $request[$requestAttribute])->format('H:i:s');
-            $model->{$attribute} = $newDate;
+            $model->{$attribute} = $value->format('H:i:s');
         }
     }
 }
