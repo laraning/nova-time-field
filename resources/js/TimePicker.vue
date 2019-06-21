@@ -4,9 +4,6 @@ import 'flatpickr/dist/themes/airbnb.css'
 
 export default {
     props: {
-        field: {
-            required: true,
-        },
         value: {
             required: false,
         },
@@ -16,10 +13,6 @@ export default {
         },
         placeholder: {
             type: String
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
         },
         twelveHourTime: {
             type: Boolean,
@@ -53,10 +46,8 @@ export default {
 <template>
   <input
     :disabled="disabled"
-    :dusk="field.attribute"
     :class="{'!cursor-not-allowed': disabled}"
     :value="value"
-    :name="field.name"
     ref="timePicker"
     type="text"
     :placeholder="placeholder">
