@@ -55,8 +55,9 @@ class TimeField extends Field
     ) {
         if ($request->exists($requestAttribute)) {
             $sentData = $request[$requestAttribute];
-            if ($this->isNullValue($sentData)){
+            if ($this->isNullValue($sentData)) {
                 $model->{$attribute} = null;
+
                 return;
             }
 
