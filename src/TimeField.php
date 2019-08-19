@@ -54,20 +54,13 @@ class TimeField extends Field
         $attribute
     ) {
         if ($request->exists($requestAttribute)) {
-            $sentData = $request[$requestAttribute];
-            if ($this->isNullValue($sentData)) {
-                $model->{$attribute} = null;
-
-                return;
-            }
-
+            $sentData = $request[$requestAttribute];            
             $value = DateTime::createFromFormat('H:i', $sentData);
-
             if ($value === false) {
                 throw new Exception('The field must contain a valid time.');
             }
-
-            $model->{$attribute} = $value->format('H:i:s');
+            $newDate = Carbon::createFromFormat('H:i', $sentData)->format('H:i');
+            $model->{$attribute} = $newDate;
         }
-    }
+    }    
 }
