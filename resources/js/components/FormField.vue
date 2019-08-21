@@ -4,6 +4,7 @@
             <div class="flex items-center">
                 <time-picker
                     class="w-full form-control form-input form-input-bordered"
+                    :class="{ 'border-danger': hasError }"
                     :field="field"
                     :placeholder="placeholder"
                     :value="value"
@@ -12,9 +13,9 @@
                 />
             </div>
 
-            <p v-if="hasError" class="my-2 text-danger">
-                {{ firstError }}
-            </p>
+            <div class="help-text error-text mt-2 text-danger" v-if="hasError">
+                {{ firstError}}
+            </div>
         </template>
     </default-field>
 </template>
