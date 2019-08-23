@@ -60,7 +60,7 @@ class TimeField extends Field
             if ($value === false) {
                 throw new Exception('The field must contain a valid time.');
             }
-            $newDate = Carbon::createFromFormat('H:i', $sentData)->format('H:i');
+            $newDate = Carbon::createFromFormat('H:i', $sentData)->format('H:i:s');
             $model->{$attribute} = $newDate;
         }
     }    
