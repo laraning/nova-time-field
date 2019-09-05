@@ -70,22 +70,24 @@ class TimeField extends Field
     }
 
     /**
-     * Validate format of given time and return correct format
+     * Validate format of given time and return correct format.
      *
      * @param string $timeString
      *
      * @return mixed string|bool
      */
-    protected function validatedTimeFormat($timeString) 
+    protected function validatedTimeFormat($timeString)
     {
         $allowedFormats = [
             'H:i',
             'H:i:s',
         ];
         foreach ($allowedFormats as $format) {
-            if (DateTime::createFromFormat($format, $timeString) !== false)
+            if (DateTime::createFromFormat($format, $timeString) !== false) {
                 return $format;
+            }
         }
+
         return false;
     }
 }
