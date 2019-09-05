@@ -56,7 +56,7 @@ class TimeField extends Field
     ) {
         if ($request->exists($requestAttribute)) {
             $sentData = $request[$requestAttribute];
-            if($this->nullable() && $sentData === null) {
+            if ($this->nullable && $sentData === null) {
                 $model->{$attribute} = null;
             } else {
                 $value = DateTime::createFromFormat('H:i', $sentData);
