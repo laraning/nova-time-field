@@ -59,13 +59,33 @@ class TimeField extends Field
             if ($this->nullable && $sentData === null) {
                 $model->{$attribute} = null;
             } else {
-                $value = DateTime::createFromFormat('H:i', $sentData);
-                if ($value === false) {
+                $validatedFormat = $this->validatedTimeFormat($sentData);
+                if (!$validatedFormat) {
                     throw new Exception('The field must contain a valid time.');
                 }
-                $newDate = Carbon::createFromFormat('H:i', $sentData)->format('H:i:s');
+                $newDate = Carbon::createFromFormat($validatedFormat, $sentData)->format('H:i:s');
                 $model->{$attribute} = $newDate;
             }
         }
+    }
+
+    /**
+     * Validate format of given time and return correct format
+     *
+     * @param string $timeString
+     *
+     * @return mixed string|bool
+     */
+    protected function validatedTimeFormat($timeString) 
+    {
+        $allowedFormats = [
+            'H:i',
+            'H:i:s',
+        ];
+        foreach ($allowedFormats as $format) {
+            if (DateTime::createFromFormat($format, $timeString) !== false)
+                return $format;
+        }
+        return false;
     }
 }
