@@ -35,7 +35,7 @@ export default {
                 enableTime: true,
                 onClose: this.onChange,
                 noCalendar: true,
-                dateFormat: "H:i",
+                dateFormat: this.twelveHourTime ? 'h:i K' : 'H:i',
                 allowInput: true,
                 time_24hr: !this.twelveHourTime,
             })
