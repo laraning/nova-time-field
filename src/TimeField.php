@@ -29,7 +29,7 @@ class TimeField extends Field
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
-            return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
+            return Carbon::createFromFormat('H:i:s', $value)->format($this->format());
         });
     }
 
@@ -38,6 +38,16 @@ class TimeField extends Field
         return $this->withMeta(['twelveHourTime' => true]);
     }
 
+    /**
+     * Returns the format used for this field.
+     *
+     * @return string
+     */
+    public function format()
+    {
+        return ($this->meta['twelveHourTime'] ?? false) ? 'h:i A' : 'H:i';
+    }
+    
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
@@ -81,6 +91,7 @@ class TimeField extends Field
         $allowedFormats = [
             'H:i',
             'H:i:s',
+            $this->format()
         ];
         foreach ($allowedFormats as $format) {
             if (DateTime::createFromFormat($format, $timeString) !== false) {
