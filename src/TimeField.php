@@ -47,7 +47,7 @@ class TimeField extends Field
     {
         return ($this->meta['twelveHourTime'] ?? false) ? 'h:i A' : 'H:i';
     }
-    
+
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
@@ -91,7 +91,7 @@ class TimeField extends Field
         $allowedFormats = [
             'H:i',
             'H:i:s',
-            $this->format()
+            $this->format(),
         ];
         foreach ($allowedFormats as $format) {
             if (DateTime::createFromFormat($format, $timeString) !== false) {
