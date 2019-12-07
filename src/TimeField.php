@@ -2,9 +2,9 @@
 
 namespace Laraning\NovaTimeField;
 
-use Carbon\Carbon;
 use DateTime;
 use Exception;
+use Carbon\Carbon;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -70,7 +70,7 @@ class TimeField extends Field
                 $model->{$attribute} = null;
             } else {
                 $validatedFormat = $this->validatedTimeFormat($sentData);
-                if (!$validatedFormat) {
+                if (! $validatedFormat) {
                     throw new Exception('The field must contain a valid time.');
                 }
                 $newDate = Carbon::createFromFormat($validatedFormat, $sentData)->format('H:i:s');
