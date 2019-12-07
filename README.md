@@ -6,7 +6,7 @@
 
 This package contains a Nova field to allow you to store time values. Under the hood it uses the [flatpickr](https://github.com/flatpickr/flatpickr) default Laravel Nova Calendar library.
 
-![screenshot of the nova time field](https://www.laraning.com/others/nova-time-field.png)
+![screenshot of the nova time field](https://assets.waygou.com/nova-time-field.jpg)
 
 ## Installation
 
