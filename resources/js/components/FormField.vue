@@ -8,6 +8,7 @@
                     :field="field"
                     :placeholder="placeholder"
                     :value="value"
+                    :disabled="isReadonly"
                     :twelveHourTime="twelveHourTime"
                     @change="handleChange"
                 />
