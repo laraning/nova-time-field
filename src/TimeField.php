@@ -29,7 +29,6 @@ class TimeField extends Field
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
-
             return $value === null ?
                 '' :
                 Carbon::createFromFormat('H:i:s', $value)->format($this->format());
