@@ -518,6 +518,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -950,7 +952,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
     methods: {
-        onChange: function onChange(event) {
+        onChange: function onChange(selectedDates, dateStr, instance) {
             this.$emit('change', this.$refs.timePicker.value);
         }
     }
@@ -14334,7 +14336,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "default-field",
-    { attrs: { field: _vm.field } },
+    { attrs: { field: _vm.field, errors: _vm.errors } },
     [
       _c("template", { slot: "field" }, [
         _c(
@@ -14345,9 +14347,11 @@ var render = function() {
               staticClass: "w-full form-control form-input form-input-bordered",
               class: { "border-danger": _vm.hasError },
               attrs: {
+                id: _vm.field.attribute,
                 field: _vm.field,
                 placeholder: _vm.placeholder,
                 value: _vm.value,
+                dusk: _vm.field.attribute,
                 disabled: _vm.isReadonly,
                 twelveHourTime: _vm.twelveHourTime
               },

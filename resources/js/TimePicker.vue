@@ -43,9 +43,9 @@ export default {
     },
 
     methods: {
-        onChange(event) {
+        onChange(selectedDates, dateStr, instance) {
             this.$emit('change', this.$refs.timePicker.value)
-        },
+        }
     },
 }
 </script>

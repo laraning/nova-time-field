@@ -95,6 +95,7 @@ class TimeField extends Field
             'H:i:s',
             $this->format(),
         ];
+
         foreach ($allowedFormats as $format) {
             if (DateTime::createFromFormat($format, $timeString) !== false) {
                 return $format;
