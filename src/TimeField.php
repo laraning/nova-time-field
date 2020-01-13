@@ -41,7 +41,9 @@ class TimeField extends Field
     /**
      * Sets the step for the minute input.
      *
-     * @param  integer  $step
+     * @param int $step
+     *
+     * @return $this
      */
     public function minuteIncrement($step)
     {
