@@ -49,7 +49,7 @@ class TimeField extends Field
     {
         return $this->withMeta(['minuteIncrement' => $step]);
     }
-    
+
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
