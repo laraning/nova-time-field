@@ -39,6 +39,16 @@ class TimeField extends Field
     }
 
     /**
+     * Sets the step for the minute input.
+     *
+     * @param  integer  $step
+     */
+    public function minuteIncrement($step)
+    {
+        return $this->withMeta(['minuteIncrement' => $step]);
+    }
+    
+    /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
