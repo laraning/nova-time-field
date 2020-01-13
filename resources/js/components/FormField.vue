@@ -9,6 +9,7 @@
                     :placeholder="placeholder"
                     :value="value"
                     :twelveHourTime="twelveHourTime"
+                    :minuteIncrement="minuteIncrement"
                     @change="handleChange"
                 />
             </div>
@@ -36,6 +37,10 @@ export default {
 
         twelveHourTime() {
             return this.field.twelveHourTime || false;
+        },
+
+        minuteIncrement() {
+            return this.field.minuteIncrement || 5;
         }
     },
 }
