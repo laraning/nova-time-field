@@ -31,7 +31,7 @@ class TimeField extends Field
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
             return $value === null ?
                 '' :
-                Carbon::createFromFormat('H:i', $value)->format($this->format());
+                Carbon::createFromFormat('H:i:s', $value)->format($this->format());
         });
     }
 
@@ -75,7 +75,7 @@ class TimeField extends Field
                 if (!$validatedFormat) {
                     throw new Exception('The field must contain a valid time.');
                 }
-                $newDate = Carbon::createFromFormat($validatedFormat, $sentData)->format('H:i');
+                $newDate = Carbon::createFromFormat($validatedFormat, $sentData)->format('H:i:s');
                 $model->{$attribute} = $newDate;
             }
         }
