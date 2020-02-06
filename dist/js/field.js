@@ -515,23 +515,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["FormField"]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["FormField"]],
 
-  components: { TimePicker: __WEBPACK_IMPORTED_MODULE_0__TimePicker___default.a },
+    components: { TimePicker: __WEBPACK_IMPORTED_MODULE_0__TimePicker___default.a },
 
-  computed: {
-    placeholder: function placeholder() {
-      return moment(new Date()).format("HH:ss");
-    },
-    twelveHourTime: function twelveHourTime() {
-      return this.field.twelveHourTime || false;
+    computed: {
+        placeholder: function placeholder() {
+            return moment(new Date()).format('HH:ss');
+        },
+        twelveHourTime: function twelveHourTime() {
+            return this.field.twelveHourTime || false;
+        },
+        minuteIncrement: function minuteIncrement() {
+            return this.field.minuteIncrement || 5;
+        }
     }
-  }
 });
 
 /***/ }),
@@ -596,7 +602,7 @@ var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(15)("05464087", content, false, {});
+var update = __webpack_require__(15)("60262c87", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -620,7 +626,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-4c69ed4e] {\n    cursor: not-allowed !important;\n}\n", ""]);
+exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-4c69ed4e] {\r\n    cursor: not-allowed !important;\n}\r\n", ""]);
 
 // exports
 
@@ -924,6 +930,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }), _defineProperty(_props, 'twelveHourTime', {
         type: Boolean,
         default: true
+    }), _defineProperty(_props, 'minuteIncrement', {
+        type: Number,
+        default: 5
     }), _props),
 
     data: function data() {
@@ -940,7 +949,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 noCalendar: true,
                 dateFormat: "H:i",
                 allowInput: true,
-                time_24hr: !_this.twelveHourTime
+                time_24hr: !_this.twelveHourTime,
+                minuteIncrement: _this.minuteIncrement
             });
         });
     },
@@ -957,7 +967,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* flatpickr v4.6.2, @license MIT */
+/* flatpickr v4.6.3, @license MIT */
 (function (global, factory) {
      true ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -2295,6 +2305,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             return self.weekdayContainer;
         }
         function updateWeekdays() {
+            if (!self.weekdayContainer) {
+                return;
+            }
             var firstDayOfWeek = self.l10n.firstDayOfWeek;
             var weekdays = self.l10n.weekdays.shorthand.slice();
             if (firstDayOfWeek > 0 && firstDayOfWeek < weekdays.length) {
@@ -2472,6 +2485,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     return elem.contains(eventTarget_1);
                 });
                 if (lostFocus && isIgnored) {
+                    if (self.timeContainer !== undefined &&
+                        self.minuteElement !== undefined &&
+                        self.hourElement !== undefined) {
+                        updateTime();
+                    }
                     self.close();
                     if (self.config.mode === "range" && self.selectedDates.length === 1) {
                         self.clear(false);
@@ -2629,7 +2647,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         e.preventDefault();
                         var delta = e.keyCode === 40 ? 1 : -1;
                         if ((self.daysContainer && e.target.$i !== undefined) ||
-                            e.target === self.input) {
+                            e.target === self.input ||
+                            e.target === self.altInput) {
                             if (e.ctrlKey) {
                                 e.stopPropagation();
                                 changeYear(self.currentYear - delta);
@@ -2893,7 +2912,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 set: minMaxDateSetter("max")
             });
             var minMaxTimeSetter = function (type) { return function (val) {
-                self.config[type === "min" ? "_minTime" : "_maxTime"] = self.parseDate(val, "H:i");
+                self.config[type === "min" ? "_minTime" : "_maxTime"] = self.parseDate(val, "H:i:S");
             }; };
             Object.defineProperty(self.config, "minTime", {
                 get: function () { return self.config._minTime; },
@@ -2976,7 +2995,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 (configPosHorizontal != null && configPosHorizontal === "center"
                     ? (calendarWidth - inputBounds.width) / 2
                     : 0);
-            var right = window.document.body.offsetWidth - inputBounds.right;
+            var right = window.document.body.offsetWidth - (window.pageXOffset + inputBounds.right);
             var rightMost = left + calendarWidth > window.document.body.offsetWidth;
             var centerMost = right + calendarWidth > window.document.body.offsetWidth;
             toggleClass(self.calendarContainer, "rightMost", rightMost);
@@ -14336,7 +14355,8 @@ var render = function() {
                 field: _vm.field,
                 placeholder: _vm.placeholder,
                 value: _vm.value,
-                twelveHourTime: _vm.twelveHourTime
+                twelveHourTime: _vm.twelveHourTime,
+                minuteIncrement: _vm.minuteIncrement
               },
               on: { change: _vm.handleChange }
             })
@@ -14348,7 +14368,7 @@ var render = function() {
           ? _c(
               "div",
               { staticClass: "help-text error-text mt-2 text-danger" },
-              [_vm._v(_vm._s(_vm.firstError))]
+              [_vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")]
             )
           : _vm._e()
       ])
