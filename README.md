@@ -46,6 +46,13 @@ By default the time component uses a 24 hour format. Still you can make it in 12
 ```php
 TimeField::make('Post start Time')->withTwelveHourTime(),
 ```
+
+You can also change the default 5 minute increments to another number:
+
+```php
+TimeField::make('Post start Time')->minuteIncrement(1),
+```
+
 ## Current development status
 
 - [x] Make release 0.1.0.
