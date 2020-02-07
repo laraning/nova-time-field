@@ -515,14 +515,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
+=======
+>>>>>>> parent of 9985501... ~ Recompiled assets
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+<<<<<<< HEAD
     mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["FormField"]],
 
     components: { TimePicker: __WEBPACK_IMPORTED_MODULE_0__TimePicker___default.a },
@@ -538,6 +542,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.field.minuteIncrement || 5;
         }
     }
+=======
+  mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["FormField"]],
+
+  components: { TimePicker: __WEBPACK_IMPORTED_MODULE_0__TimePicker___default.a },
+
+  computed: {
+    placeholder: function placeholder() {
+      return moment(new Date()).format("HH:ss");
+    },
+    twelveHourTime: function twelveHourTime() {
+      return this.field.twelveHourTime || false;
+    }
+  }
+>>>>>>> parent of 9985501... ~ Recompiled assets
 });
 
 /***/ }),
@@ -602,7 +620,11 @@ var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< HEAD
 var update = __webpack_require__(15)("60262c87", content, false, {});
+=======
+var update = __webpack_require__(15)("05464087", content, false, {});
+>>>>>>> parent of 9985501... ~ Recompiled assets
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -626,7 +648,11 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
+<<<<<<< HEAD
 exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-4c69ed4e] {\r\n    cursor: not-allowed !important;\n}\r\n", ""]);
+=======
+exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-4c69ed4e] {\n    cursor: not-allowed !important;\n}\n", ""]);
+>>>>>>> parent of 9985501... ~ Recompiled assets
 
 // exports
 
@@ -930,9 +956,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }), _defineProperty(_props, 'twelveHourTime', {
         type: Boolean,
         default: true
+<<<<<<< HEAD
     }), _defineProperty(_props, 'minuteIncrement', {
         type: Number,
         default: 5
+=======
+>>>>>>> parent of 9985501... ~ Recompiled assets
     }), _props),
 
     data: function data() {
@@ -949,8 +978,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 noCalendar: true,
                 dateFormat: "H:i",
                 allowInput: true,
+<<<<<<< HEAD
                 time_24hr: !_this.twelveHourTime,
                 minuteIncrement: _this.minuteIncrement
+=======
+                time_24hr: !_this.twelveHourTime
+>>>>>>> parent of 9985501... ~ Recompiled assets
             });
         });
     },
@@ -967,7 +1000,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 /* flatpickr v4.6.3, @license MIT */
+=======
+/* flatpickr v4.6.2, @license MIT */
+>>>>>>> parent of 9985501... ~ Recompiled assets
 (function (global, factory) {
      true ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -2305,9 +2342,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             return self.weekdayContainer;
         }
         function updateWeekdays() {
+<<<<<<< HEAD
             if (!self.weekdayContainer) {
                 return;
             }
+=======
+>>>>>>> parent of 9985501... ~ Recompiled assets
             var firstDayOfWeek = self.l10n.firstDayOfWeek;
             var weekdays = self.l10n.weekdays.shorthand.slice();
             if (firstDayOfWeek > 0 && firstDayOfWeek < weekdays.length) {
@@ -2485,11 +2525,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     return elem.contains(eventTarget_1);
                 });
                 if (lostFocus && isIgnored) {
+<<<<<<< HEAD
                     if (self.timeContainer !== undefined &&
                         self.minuteElement !== undefined &&
                         self.hourElement !== undefined) {
                         updateTime();
                     }
+=======
+>>>>>>> parent of 9985501... ~ Recompiled assets
                     self.close();
                     if (self.config.mode === "range" && self.selectedDates.length === 1) {
                         self.clear(false);
@@ -2647,8 +2690,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         e.preventDefault();
                         var delta = e.keyCode === 40 ? 1 : -1;
                         if ((self.daysContainer && e.target.$i !== undefined) ||
+<<<<<<< HEAD
                             e.target === self.input ||
                             e.target === self.altInput) {
+=======
+                            e.target === self.input) {
+>>>>>>> parent of 9985501... ~ Recompiled assets
                             if (e.ctrlKey) {
                                 e.stopPropagation();
                                 changeYear(self.currentYear - delta);
@@ -2912,7 +2959,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 set: minMaxDateSetter("max")
             });
             var minMaxTimeSetter = function (type) { return function (val) {
+<<<<<<< HEAD
                 self.config[type === "min" ? "_minTime" : "_maxTime"] = self.parseDate(val, "H:i:S");
+=======
+                self.config[type === "min" ? "_minTime" : "_maxTime"] = self.parseDate(val, "H:i");
+>>>>>>> parent of 9985501... ~ Recompiled assets
             }; };
             Object.defineProperty(self.config, "minTime", {
                 get: function () { return self.config._minTime; },
@@ -2995,7 +3046,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 (configPosHorizontal != null && configPosHorizontal === "center"
                     ? (calendarWidth - inputBounds.width) / 2
                     : 0);
+<<<<<<< HEAD
             var right = window.document.body.offsetWidth - (window.pageXOffset + inputBounds.right);
+=======
+            var right = window.document.body.offsetWidth - inputBounds.right;
+>>>>>>> parent of 9985501... ~ Recompiled assets
             var rightMost = left + calendarWidth > window.document.body.offsetWidth;
             var centerMost = right + calendarWidth > window.document.body.offsetWidth;
             toggleClass(self.calendarContainer, "rightMost", rightMost);
@@ -14355,8 +14410,12 @@ var render = function() {
                 field: _vm.field,
                 placeholder: _vm.placeholder,
                 value: _vm.value,
+<<<<<<< HEAD
                 twelveHourTime: _vm.twelveHourTime,
                 minuteIncrement: _vm.minuteIncrement
+=======
+                twelveHourTime: _vm.twelveHourTime
+>>>>>>> parent of 9985501... ~ Recompiled assets
               },
               on: { change: _vm.handleChange }
             })
@@ -14368,7 +14427,11 @@ var render = function() {
           ? _c(
               "div",
               { staticClass: "help-text error-text mt-2 text-danger" },
+<<<<<<< HEAD
               [_vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")]
+=======
+              [_vm._v(_vm._s(_vm.firstError))]
+>>>>>>> parent of 9985501... ~ Recompiled assets
             )
           : _vm._e()
       ])
