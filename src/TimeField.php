@@ -35,6 +35,18 @@ class TimeField extends Field
         });
     }
 
+    /*
+     * Sets the step for the minute input.
+     *
+     * @param int $step
+     *
+     * @return $this
+     */
+    public function minuteIncrement($step)
+    {
+        return $this->withMeta(['minuteIncrement' => $step]);
+    }
+
     public function withTwelveHourTime()
     {
         return $this->withMeta(['twelveHourTime' => true]);
