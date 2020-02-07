@@ -24,6 +24,10 @@ export default {
         twelveHourTime: {
             type: Boolean,
             default: true,
+        },
+        minuteIncrement: {
+            type: Number,
+            default: 5,
         }
     },
 
@@ -38,6 +42,7 @@ export default {
                 dateFormat: this.twelveHourTime ? 'h:i K' : 'H:i',
                 allowInput: true,
                 time_24hr: !this.twelveHourTime,
+                minuteIncrement: this.minuteIncrement
             })
         })
     },

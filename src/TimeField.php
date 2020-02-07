@@ -41,16 +41,6 @@ class TimeField extends Field
     }
 
     /**
-     * Returns the format used for this field.
-     *
-     * @return string
-     */
-    public function format()
-    {
-        return ($this->meta['twelveHourTime'] ?? false) ? 'h:i A' : 'H:i';
-    }
-
-    /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
