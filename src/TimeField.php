@@ -29,25 +29,15 @@ class TimeField extends Field
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
-            return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
+            return $value === null ?
+                '' :
+                Carbon::createFromFormat('H:i:s', $value)->format($this->format());
         });
     }
 
     public function withTwelveHourTime()
     {
         return $this->withMeta(['twelveHourTime' => true]);
-    }
-
-    /**
-     * Sets the step for the minute input.
-     *
-     * @param int $step
-     *
-     * @return $this
-     */
-    public function minuteIncrement($step)
-    {
-        return $this->withMeta(['minuteIncrement' => $step]);
     }
 
     /**
@@ -93,7 +83,9 @@ class TimeField extends Field
         $allowedFormats = [
             'H:i',
             'H:i:s',
+            $this->format(),
         ];
+
         foreach ($allowedFormats as $format) {
             if (DateTime::createFromFormat($format, $timeString) !== false) {
                 return $format;

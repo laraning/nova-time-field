@@ -39,7 +39,7 @@ export default {
                 enableTime: true,
                 onClose: this.onChange,
                 noCalendar: true,
-                dateFormat: "H:i",
+                dateFormat: this.twelveHourTime ? 'h:i K' : 'H:i',
                 allowInput: true,
                 time_24hr: !this.twelveHourTime,
                 minuteIncrement: this.minuteIncrement
@@ -48,9 +48,9 @@ export default {
     },
 
     methods: {
-        onChange(event) {
+        onChange(selectedDates, dateStr, instance) {
             this.$emit('change', this.$refs.timePicker.value)
-        },
+        }
     },
 }
 </script>

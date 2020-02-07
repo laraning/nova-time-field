@@ -1,13 +1,16 @@
 <template>
-    <default-field :field="field">
+    <default-field :field="field" :errors="errors">
         <template slot="field">
             <div class="flex items-center">
                 <time-picker
                     class="w-full form-control form-input form-input-bordered"
                     :class="{ 'border-danger': hasError }"
+                    :id="field.attribute"
                     :field="field"
                     :placeholder="placeholder"
                     :value="value"
+                    :dusk="field.attribute"
+                    :disabled="isReadonly"
                     :twelveHourTime="twelveHourTime"
                     :minuteIncrement="minuteIncrement"
                     @change="handleChange"
