@@ -10,10 +10,6 @@ export default {
         value: {
             required: false,
         },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
         placeholder: {
             type: String
         },
