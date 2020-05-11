@@ -516,10 +516,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -539,6 +535,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         minuteIncrement: function minuteIncrement() {
             return this.field.minuteIncrement || 5;
         }
+    },
+
+    methods: {
+        onClear: function onClear(event) {
+            if (event.target.value === '') {
+                this.flatpickr.close();
+            }
+        }
+    },
+
+    beforeDestroy: function beforeDestroy() {
+        this.flatpickr.destroy();
     }
 });
 
@@ -904,38 +912,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_flatpickr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_flatpickr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__);
-var _props;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: (_props = {
+    props: {
         field: {
             required: true
         },
         value: {
             required: false
         },
+        placeholder: {
+            type: String
+        },
         disabled: {
             type: Boolean,
             default: false
         },
-        placeholder: {
-            type: String
+        twelveHourTime: {
+            type: Boolean,
+            default: true
+        },
+        minuteIncrement: {
+            type: Number,
+            default: 5
         }
-    }, _defineProperty(_props, 'disabled', {
-        type: Boolean,
-        default: false
-    }), _defineProperty(_props, 'twelveHourTime', {
-        type: Boolean,
-        default: true
-    }), _defineProperty(_props, 'minuteIncrement', {
-        type: Number,
-        default: 5
-    }), _props),
+    },
 
     data: function data() {
         return { flatpickr: null };
@@ -961,6 +965,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     methods: {
         onChange: function onChange(selectedDates, dateStr, instance) {
             this.$emit('change', this.$refs.timePicker.value);
+        },
+        onClear: function onClear(event) {
+            if (event.target.value === '') {
+                this.flatpickr.close();
+            }
         }
     }
 });
@@ -4093,7 +4102,22 @@ var render = function() {
       type: "text",
       placeholder: _vm.placeholder
     },
-    domProps: { value: _vm.value }
+    domProps: { value: _vm.value },
+    on: {
+      keyup: function($event) {
+        if (
+          !$event.type.indexOf("key") &&
+          _vm._k($event.keyCode, "delete", [8, 46], $event.key, [
+            "Backspace",
+            "Delete",
+            "Del"
+          ])
+        ) {
+          return null
+        }
+        return _vm.onClear($event)
+      }
+    }
   })
 }
 var staticRenderFns = []
@@ -31546,15 +31570,7 @@ var render = function() {
             })
           ],
           1
-        ),
-        _vm._v(" "),
-        _vm.hasError
-          ? _c(
-              "div",
-              { staticClass: "help-text error-text mt-2 text-danger" },
-              [_vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")]
-            )
-          : _vm._e()
+        )
       ])
     ],
     2

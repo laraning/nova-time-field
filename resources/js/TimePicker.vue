@@ -46,7 +46,13 @@ export default {
     methods: {
         onChange(selectedDates, dateStr, instance) {
             this.$emit('change', this.$refs.timePicker.value)
+        },
+
+       onClear(event) {
+        if(event.target.value === '') {
+            this.flatpickr.close();
         }
+       }
     },
 }
 </script>
@@ -60,6 +66,7 @@ export default {
     :name="field.name"
     ref="timePicker"
     type="text"
+    @keyup.delete="onClear"
     :placeholder="placeholder">
 </template>
 

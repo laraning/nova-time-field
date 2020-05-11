@@ -16,10 +16,6 @@
                     @change="handleChange"
                 />
             </div>
-
-            <div class="help-text error-text mt-2 text-danger" v-if="hasError">
-                {{ firstError}}
-            </div>
         </template>
     </default-field>
 </template>
@@ -45,6 +41,18 @@ export default {
         minuteIncrement() {
             return this.field.minuteIncrement || 5;
         }
+    },
+
+    methods: {
+       onClear(event) {
+         if(event.target.value === '') {
+           this.flatpickr.close();
+         }
+       }
+      },
+
+    beforeDestroy() {
+        this.flatpickr.destroy()
     },
 }
 </script>
