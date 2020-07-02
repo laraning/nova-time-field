@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -174,6 +174,48 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var Timezones = {
+    computed: {
+        timezoneAdjustments: function timezoneAdjustments() {
+            return this.field.timezoneAdjustments || false;
+        },
+
+
+        /**
+         * Get the user's local timezone.
+         */
+        userTimezone: function userTimezone() {
+            return Nova.config.userTimezone ? Nova.config.userTimezone : moment.tz.guess();
+        }
+    },
+    methods: {
+        /**
+         * Convert the given localized date time string to the application's timezone.
+         */
+        toAppTimezone: function toAppTimezone(value) {
+            return value ? moment.tz(value, 'HH:mm', this.userTimezone).clone().tz(Nova.config.timezone).format('HH:mm') : value;
+        },
+
+        /**
+         * Convert the given application timezone date time string to the local timezone.
+         */
+        fromAppTimezone: function fromAppTimezone(value) {
+            if (!value) {
+                return value;
+            }
+
+            return moment.tz(value, 'HH:mm', Nova.config.timezone).clone().tz(this.userTimezone).format('HH:mm');
+        }
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Timezones);
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -255,32 +297,32 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(3);
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-Nova.booting(function (Vue, router) {
-    Vue.component('index-nova-time-field', __webpack_require__(4));
-    Vue.component('detail-nova-time-field', __webpack_require__(7));
-    Vue.component('form-nova-time-field', __webpack_require__(10));
-});
+module.exports = __webpack_require__(4);
+
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+Nova.booting(function (Vue, router) {
+    Vue.component('index-nova-time-field', __webpack_require__(5));
+    Vue.component('detail-nova-time-field', __webpack_require__(8));
+    Vue.component('form-nova-time-field', __webpack_require__(11));
+});
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(5)
+var __vue_script__ = __webpack_require__(6)
 /* template */
-var __vue_template__ = __webpack_require__(6)
+var __vue_template__ = __webpack_require__(7)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -319,22 +361,32 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_Timezones__ = __webpack_require__(1);
 //
 //
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['field']
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_Timezones__["a" /* default */]],
+    props: ['field'],
+
+    computed: {
+        localizedValue: function localizedValue() {
+            return this.timezoneAdjustments ? this.fromAppTimezone(this.field.value) : this.field.value;
+        }
+    }
 });
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -342,7 +394,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("span", { staticClass: "whitespace-no-wrap" }, [
-    _vm._v(_vm._s(_vm.field.value))
+    _vm._v(_vm._s(_vm.localizedValue))
   ])
 }
 var staticRenderFns = []
@@ -356,15 +408,15 @@ if (false) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(8)
+var __vue_script__ = __webpack_require__(9)
 /* template */
-var __vue_template__ = __webpack_require__(9)
+var __vue_template__ = __webpack_require__(10)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -403,29 +455,56 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_Timezones__ = __webpack_require__(1);
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['field']
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_Timezones__["a" /* default */]],
+    props: ['field'],
+
+    computed: {
+        localizedValue: function localizedValue() {
+            return this.timezoneAdjustments ? this.fromAppTimezone(this.field.value) : this.field.value;
+        }
+    }
 });
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("panel-item", { attrs: { field: _vm.field } })
+  return _c(
+    "panel-item",
+    { attrs: { field: _vm.field } },
+    [
+      _c("template", { slot: "value" }, [
+        _c("p", { staticClass: "text-90" }, [
+          _vm._v("\n            " + _vm._s(_vm.localizedValue) + "\n        ")
+        ])
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -438,15 +517,15 @@ if (false) {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(11)
+var __vue_script__ = __webpack_require__(12)
 /* template */
-var __vue_template__ = __webpack_require__(25)
+var __vue_template__ = __webpack_require__(26)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -485,15 +564,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TimePicker__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TimePicker__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TimePicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TimePicker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_Timezones__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_laravel_nova__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_laravel_nova__);
 //
 //
 //
@@ -516,12 +596,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["FormField"]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_2_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_2_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_1__mixins_Timezones__["a" /* default */]],
 
     components: { TimePicker: __WEBPACK_IMPORTED_MODULE_0__TimePicker___default.a },
 
@@ -542,6 +623,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (event.target.value === '') {
                 this.flatpickr.close();
             }
+        },
+
+
+        /**
+         * Set the initial, internal value for the field.
+         */
+        setInitialValue: function setInitialValue() {
+            this.value = this.timezoneAdjustments ? this.fromAppTimezone(this.field.value || '') : this.field.value || '';
+        },
+
+
+        /**
+         * Fill the given FormData object with the field's internal value.
+         */
+        fill: function fill(formData) {
+            formData.append(this.field.attribute, this.timezoneAdjustments ? this.toAppTimezone(this.value || '') : this.value || '');
         }
     },
 
@@ -551,19 +648,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(13)
+  __webpack_require__(14)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(17)
+var __vue_script__ = __webpack_require__(18)
 /* template */
-var __vue_template__ = __webpack_require__(23)
+var __vue_template__ = __webpack_require__(24)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -602,17 +699,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(14);
+var content = __webpack_require__(15);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(15)("60262c87", content, false, {});
+var update = __webpack_require__(16)("05464087", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -628,21 +725,21 @@ if(false) {
 }
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-4c69ed4e] {\r\n    cursor: not-allowed !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-4c69ed4e] {\n    cursor: not-allowed !important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -661,7 +758,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(16)
+var listToStyles = __webpack_require__(17)
 
 /*
 type StyleObject = {
@@ -870,7 +967,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 /**
@@ -903,14 +1000,14 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_flatpickr__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_flatpickr__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_flatpickr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_flatpickr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__);
 
 
@@ -975,7 +1072,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* flatpickr v4.6.3, @license MIT */
@@ -3586,13 +3683,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(21);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3600,7 +3697,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(21)(content, options);
+var update = __webpack_require__(22)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -3617,10 +3714,10 @@ if(false) {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
@@ -3631,7 +3728,7 @@ exports.push([module.i, ".flatpickr-calendar {\n  background: transparent;\n  op
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3677,7 +3774,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(22);
+var	fixUrls = __webpack_require__(23);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -3990,7 +4087,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 
@@ -4085,7 +4182,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -4131,7 +4228,7 @@ if (false) {
 }
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -31537,7 +31634,7 @@ if (hadRuntime) {
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
