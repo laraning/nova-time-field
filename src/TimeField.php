@@ -52,13 +52,14 @@ class TimeField extends Field
 
     /**
      * @param null|string $adjustment The adjustment to be applied to the date from the database.
+     *
      * @return TimeField
      */
     public function withTimezoneAdjustments($adjustment = null)
     {
         return $this->withMeta([
             'timezoneAdjustments' => true,
-            'timezoneAdjustment' => $adjustment,
+            'timezoneAdjustment'  => $adjustment,
         ]);
     }
 
