@@ -27,6 +27,13 @@ const Timezones = {
                 return value;
             }
 
+            if (this.field.timezoneAdjustment) {
+                return moment.utc(value, 'HH:mm')
+                    .clone()
+                    .add(this.field.timezoneAdjustment, 'minutes')
+                    .format('HH:mm');
+            }
+
             return moment.tz(value, 'HH:mm', Nova.config.timezone).clone().tz(this.userTimezone).format('HH:mm');
         },
     }

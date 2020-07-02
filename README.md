@@ -66,6 +66,17 @@ interact with the timefield in their local time, but the time would be saved int
 E.G. The user may select 14:00. They will always see the time as 14:00, but the database will save it as 13:00 as it makes 
 the BST -> GMT adjustments behind the scenes.
 
+As well as handling switching the time to and from your base app timezone, you may also pass in a timezone offset (in minutes), 
+such as the one returned by `moment().utcOffset()`. This will then adjust the time to display with the adjusted timezone
+rather than the users timezone. This is useful if you're saving the time in UTC along with the offset of the browser that 
+was used to submit it.
+
+Here you can see how we'd move UTC to BST by passing an offset of 60
+
+```php
+TimeField::make('Post start Time')->withTimezoneAdjustments(60),
+```
+
 ## Current development status
 
 - [x] Make release 0.1.0.
