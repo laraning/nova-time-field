@@ -48,6 +48,10 @@ export default {
         userTimezone: function userTimezone() {
             return Nova.config.userTimezone ? Nova.config.userTimezone : moment.tz.guess();
         },
+
+        timezoneAdjustments() {
+            return this.field.timezoneAdjustments || false;
+        },
     },
 
     methods: {
@@ -61,14 +65,19 @@ export default {
          * Set the initial, internal value for the field.
          */
         setInitialValue() {
-            this.value = this.fromAppTimezone(this.field.value || '')
+          this.value = this.timezoneAdjustments ?
+            this.fromAppTimezone(this.field.value || '') :
+            this.field.value || ''
         },
 
         /**
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            formData.append(this.field.attribute, this.toAppTimezone(this.value) || '')
+          formData.append(this.field.attribute, this.timezoneAdjustments ?
+            this.toAppTimezone(this.value || '') :
+            this.value || ''
+          )
         },
 
         /**

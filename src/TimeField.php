@@ -50,6 +50,11 @@ class TimeField extends Field
         return $this->withMeta(['twelveHourTime' => true]);
     }
 
+    public function withTimezoneAdjustments()
+    {
+        return $this->withMeta(['timezoneAdjustments' => true]);
+    }
+
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
