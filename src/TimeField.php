@@ -58,7 +58,7 @@ class TimeField extends Field
     {
         return $this->withMeta([
             'timezoneAdjustments' => true,
-            'timezoneAdjustment' => $adjustment,
+            'timezoneAdjustment'  => $adjustment,
         ]);
     }
 
