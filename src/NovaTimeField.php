@@ -85,7 +85,7 @@ class NovaTimeField extends Field
                 $model->{$attribute} = null;
             } else {
                 $validatedFormat = $this->validatedTimeFormat($sentData);
-                if (! $validatedFormat) {
+                if (!$validatedFormat) {
                     throw new Exception('The field must contain a valid time.');
                 }
                 $newDate = Carbon::createFromFormat($validatedFormat, $sentData)->format('H:i:s');
