@@ -51,6 +51,19 @@ class TimeField extends Field
     }
 
     /**
+     * @param null|string $adjustment The adjustment to be applied to the date from the database.
+     *
+     * @return TimeField
+     */
+    public function withTimezoneAdjustments($adjustment = null)
+    {
+        return $this->withMeta([
+            'timezoneAdjustments' => true,
+            'timezoneAdjustment'  => $adjustment,
+        ]);
+    }
+
+    /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
