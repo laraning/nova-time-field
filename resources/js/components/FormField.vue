@@ -28,11 +28,13 @@ import { FormField, HandlesValidationErrors } from 'laravel-nova'
 export default {
     mixins: [HandlesValidationErrors, FormField, Timezones],
 
+    props: ['field'],
+
     components: { TimePicker },
 
     computed: {
         placeholder() {
-            return moment(new Date()).format('HH:ss')
+            return this.field.placeholder || moment().format('HH:mm');
         },
 
         twelveHourTime() {
