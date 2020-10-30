@@ -33,9 +33,13 @@ export default {
     components: { TimePicker },
 
     computed: {
-        placeholder() {
-            return this.field.placeholder || moment().format('HH:mm');
-        },
+      placeholder() {
+        if(!!this.field.extraAttributes && !!this.field.extraAttributes.placeholder) {
+          return this.field.extraAttributes.placeholder;
+        }
+
+        return moment().format(this.twelveHourTime ? 'hh:mm A' : 'HH:mm');
+      },
 
         twelveHourTime() {
             return this.field.twelveHourTime || false;
