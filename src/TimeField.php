@@ -50,11 +50,6 @@ class TimeField extends Field
         return $this->withMeta(['twelveHourTime' => true]);
     }
 
-    public function placeholder(string $placeholder)
-    {
-        return $this->withMeta(['placeholder' => $placeholder]);
-    }
-
     /**
      * @param null|string $adjustment The adjustment to be applied to the date from the database.
      *
