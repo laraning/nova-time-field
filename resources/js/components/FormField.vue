@@ -32,7 +32,7 @@ export default {
 
     computed: {
         placeholder() {
-            return moment(new Date()).format('HH:ss')
+            return this.field.placeholder || moment().format('HH:mm')
         },
 
         twelveHourTime() {

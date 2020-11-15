@@ -37,7 +37,7 @@ class TimeField extends Field
 
     public function format()
     {
-        return ($this->meta['twelveHourTime'] ?? false) ? 'h:i A' : 'H:i';
+        return ($this->meta['twelveHourTime'] ?? false) ? 'g:i A' : 'H:i';
     }
 
     public function minuteIncrement($step)

@@ -12,10 +12,11 @@
   "devDependencies": {
     "cross-env": "^5.0.0",
     "laravel-mix": "^1.0",
-    "laravel-nova": "^1.0"
+    "laravel-nova": "^1.7.0"
   },
   "dependencies": {
-    "flatpickr": "^4.5.2",
-    "vue": "^2.5.0"
+    "flatpickr": "^4.6.6",
+    "vue": "^2.6.0",
+    "vue-template-compiler": "^2.6.12"
   }
 }

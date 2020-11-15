@@ -17,6 +17,9 @@ export default {
 
     computed: {
         localizedValue() {
+
+            console.log(this.field.value)
+
             return this.timezoneAdjustments ?
             this.fromAppTimezone(this.field.value) :
             this.field.value
