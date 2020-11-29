@@ -48,11 +48,15 @@ export default {
             this.$emit('change', this.$refs.timePicker.value)
         },
 
-       onClear(event) {
-        if(event.target.value === '') {
-            this.flatpickr.close();
-        }
-       }
+        onClear(event) {
+            if(event.target.value === '') {
+                this.flatpickr.close();
+            }
+        },
+
+        beforeDestroy() {
+            this.flatpickr.destroy()
+        },
     },
 }
 </script>

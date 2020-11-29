@@ -45,9 +45,11 @@ export default {
     },
 
     methods: {
-        onClear(event) {
-            if(event.target.value === '') {
-                this.flatpickr.close();
+
+        handleChange(value) {
+            this.value = value;
+            if (this.field) {
+                Nova.$emit(this.field.attribute + '-change', this.value)
             }
         },
 
@@ -69,10 +71,6 @@ export default {
                   this.value || ''
             )
         },
-    },
-
-    beforeDestroy() {
-        this.flatpickr.destroy()
     },
 }
 </script>
