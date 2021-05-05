@@ -562,6 +562,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
+            console.log('value (' + this.field.attribute + ') : |' + this.value + '|');
             formData.append(this.field.attribute, this.timezoneAdjustments ? this.toAppTimezone(this.value || '') : this.value || '');
         }
     }
@@ -1405,6 +1406,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_flatpickr__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_themes_airbnb_css__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1460,7 +1474,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('change', this.$refs.timePicker.value);
         },
         onClear: function onClear(event) {
-            if (event.target.value === '') {
+            if (event.target.value == '') {
                 this.flatpickr.close();
             }
         },

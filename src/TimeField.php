@@ -28,8 +28,16 @@ class TimeField extends Field
      */
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
+<<<<<<< Updated upstream
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
             if (!is_null($value)) {
+=======
+        parent::__construct($name, $attribute, $resolveCallback ?? function ($value) use ($attribute) {
+
+            if (! is_null($value)) {
+                info('value received (' . $attribute . '): |' . $value . '|');
+
+>>>>>>> Stashed changes
                 // Convert the value string into a Carbon date/time object.
                 $value = Carbon::createFromFormat('H:i:s', $value)->format($this->format());
 
@@ -99,7 +107,15 @@ class TimeField extends Field
      */
     protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
     {
+        info('(fill entry '.$requestAttribute.')-'.$request->input($requestAttribute));
+
         if ($request->exists($requestAttribute)) {
+            if (empty($request->input($requestAttribute))) {
+                // Call parent method from the Nova framework immediately.
+                parent::fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
+                return;
+            };
+
             $value = $request->input($requestAttribute);
 
             // If we are having a 12 hour time format, we need to convert it to 24h time format.
@@ -109,6 +125,7 @@ class TimeField extends Field
 
             // Readjust the request attribute value, and call parent for compatibility reasons.
             $request[$requestAttribute] = $hydratedValue;
+            info('(fill hydrated '.$requestAttribute.')-'.$request[$requestAttribute]);
 
             // Call parent method from the Nova framework.
             parent::fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
