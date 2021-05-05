@@ -28,16 +28,9 @@ class TimeField extends Field
      */
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
-<<<<<<< Updated upstream
-        parent::__construct($name, $attribute, $resolveCallback ?? function ($value) {
-            if (!is_null($value)) {
-=======
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) use ($attribute) {
 
             if (! is_null($value)) {
-                info('value received (' . $attribute . '): |' . $value . '|');
-
->>>>>>> Stashed changes
                 // Convert the value string into a Carbon date/time object.
                 $value = Carbon::createFromFormat('H:i:s', $value)->format($this->format());
 
