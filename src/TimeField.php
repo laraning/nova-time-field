@@ -29,8 +29,7 @@ class TimeField extends Field
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback ?? function ($value) use ($attribute) {
-
-            if (! is_null($value)) {
+            if (!is_null($value)) {
                 // Convert the value string into a Carbon date/time object.
                 $value = Carbon::createFromFormat('H:i:s', $value)->format($this->format());
 
@@ -106,8 +105,9 @@ class TimeField extends Field
             if (empty($request->input($requestAttribute))) {
                 // Call parent method from the Nova framework immediately.
                 parent::fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
+
                 return;
-            };
+            }
 
             $value = $request->input($requestAttribute);
 
