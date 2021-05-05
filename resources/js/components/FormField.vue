@@ -66,7 +66,6 @@ export default {
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            console.log('value (' + this.field.attribute + ') : |'  + this.value + '|')
             formData.append(this.field.attribute, this.timezoneAdjustments ?
                   this.toAppTimezone(this.value || '') :
                   this.value || ''
