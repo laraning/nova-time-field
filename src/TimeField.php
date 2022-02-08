@@ -34,7 +34,7 @@ class TimeField extends Field
                 $value = Carbon::createFromFormat('H:i:s', $value)->format($this->format());
 
                 if (!$value) {
-                    throw new Exception('Field '.($attribute ?? '').' must contain a valid time value.');
+                    throw new Exception('Field ' . ($attribute ?? '') . ' must contain a valid time value.');
                 }
 
                 return $value;
@@ -144,5 +144,16 @@ class TimeField extends Field
         }
 
         return false;
+    }
+
+    /**
+     * Fill the field value with the provided value.
+     *
+     * @param  string $value
+     * @return $this
+     */
+    public function defaultValue(string $value = null)
+    {
+        return $this->withMeta(['value' => $value]);
     }
 }
